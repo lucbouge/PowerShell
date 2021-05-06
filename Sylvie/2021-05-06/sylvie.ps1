@@ -9,7 +9,7 @@ $filter_data = @{
 function match_both_close($a, $b) {
     $distance = 50
     $pattern = "(?:(?:${a}).{1,${distance}}(?:${b}))|(?:(?:${b}).{1,${distance}}(?:${a}))"
-    Write-Host $pattern
+    # Write-Host $pattern
     return $pattern
 }
 
@@ -303,20 +303,22 @@ $excel = Import-Excel -Path "$path"
 # Phase 4: Filter the Excel file with the test function
 # https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/where-object
 
-Write-Host "Initial number of lines: $($excel.length)"
+Write-Host "Number of lines in the original file: $($excel.length)"
 
 $results = $excel | Where-Object { filter_function $filter_data $_ }
 
 Write-Host "Number of lines after filtering: $($results.length)"
 
 foreach ($test_data_name in $test_data_table.Keys) {
-    Write-Host "Applying test: $test_data_name"
+    Write-Host -NoNewline  "Applying test: ${test_data_name}... "
     $new_key = "$test_data_name"
     $results | Add-Member -NotePropertyName  "$new_key" -NotePropertyValue $null
     $results | ForEach-Object { 
         $new_value = test_function $test_data_name $_ ; 
         $_."$new_key" = $new_value; 
     }
+    $lines_true = $results."$new_key" | Where-Object { $_ } 
+    Write-Host "==> $($lines_true.length)"
 }
 
 function test_or($line, $fields) {
@@ -329,7 +331,7 @@ function test_or($line, $fields) {
 }
 
 $results = $results | Where-Object { test_or $_  $test_data_table.Keys }
-Write-Host "Final number of lines: $($results.length)"
+Write-Host "Number of lines in the result file: $($results.length)"
 
 #####################################################
 # Phase 5: Export the result as an Excel file and show it up
