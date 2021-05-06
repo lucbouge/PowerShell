@@ -1,6 +1,6 @@
 
 $filter_data = @{
-    pattern = "^ANR";
+    pattern = "^ANR-(18|19|20)-";
     column  = "Projet.Code_Decision_ANR";
 }
 
@@ -24,7 +24,7 @@ $test_data_table = [ordered]@{
     }
 
     music_instrument     = @{
-        pattern_fr = match_both_close "instrument" "musique";
+        pattern_fr = match_both_close "instrument" "musi(cal|caux|que)";
         column_fr  = "Projet.Resume.francais";
         ##
         pattern_en = match_both_close "music" "instrument";
@@ -208,31 +208,31 @@ $test_data_table = [ordered]@{
     }
 
     heritage_ecosystem   = @{
-        pattern_fr = match_both_close "patrimo" "[eé]cosysteme";
+        pattern_fr = match_both_close "patrimo" "[eé]co.{0,3}syst[eè]me";
         column_fr  = "Projet.Resume.francais";
         ##
-        pattern_en = match_both_close "heritage" "ecosystem";
+        pattern_en = match_both_close "heritage" "eco.{0,3}system";
         column_en  = "Projet.Resume.anglais";
     }
 
     heritage_zoo         = @{
-        pattern_fr = match_both_close "patrimo" "Zoo";
+        pattern_fr = match_both_close "patrimo" "zoo";
         column_fr  = "Projet.Resume.francais";
         ##        
-        pattern_en = match_both_close "heritage" "Zoo";
+        pattern_en = match_both_close "heritage" "zoo";
         column_en  = "Projet.Resume.anglais";
     }
 
     heritage_aquarium    = @{
-        pattern_fr = match_both_close "patrimo" "aquarium";
+        pattern_fr = match_both_close "patrimo" "aquari";
         column_fr  = "Projet.Resume.francais";
         ##
-        pattern_en = match_both_close "heritage" "aquarium";
+        pattern_en = match_both_close "heritage" "aquari";
         column_en  = "Projet.Resume.anglais";
     }
 
     heritage_conflict    = @{
-        pattern_fr = match_both_close "patrimo" "conflit";
+        pattern_fr = match_both_close "patrimo" "confli";
         column_fr  = "Projet.Resume.francais";
         ##
         pattern_en = match_both_close "heritage" "conflict";
@@ -240,7 +240,7 @@ $test_data_table = [ordered]@{
     }
 
     heritage_war         = @{
-        pattern_fr = match_both_close "patrimo" "guerre";
+        pattern_fr = match_both_close "patrimo" "guerr";
         column_fr  = "Projet.Resume.francais";
         ##
         pattern_en = match_both_close "heritage" "war";
