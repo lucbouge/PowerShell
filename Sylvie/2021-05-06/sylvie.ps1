@@ -7,7 +7,7 @@ $filter_data = @{
 #####################################################
 
 function match_both_close($a, $b) {
-    $distance = 20
+    $distance = 50
     $pattern = "(?:(?:${a}).{1,${distance}}(?:${b}))|(?:(?:${b}).{1,${distance}}(?:${a}))"
     Write-Host $pattern
     return $pattern
