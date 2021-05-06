@@ -8,21 +8,23 @@ $filter_data = @{
 
 function match_both_close($a, $b) {
     $distance = 20
-    return "(?:(?:${a}).{1,${distance}}(?:${b}))|(?:(?:${b}).{1,${distance}}(?:${a}))"
+    $pattern = "(?:(?:${a}).{1,${distance}}(?:${b}))|(?:(?:${b}).{1,${distance}}(?:${a}))"
+    Write-Host $pattern
+    return $pattern
 }
 
 $test_data_table = [ordered]@{
 
     heritage             = @{
-        pattern_fr = "Patrimo";
+        pattern_fr = "patrimo";
         column_fr  = "Projet.Resume.francais";
         ##
-        pattern_en = "Heritag";
+        pattern_en = "heritage";
         column_en  = "Projet.Resume.anglais";
     }
 
     music_instrument     = @{
-        pattern_fr = match_both_close "instruments?" "musique";
+        pattern_fr = match_both_close "instrument" "musique";
         column_fr  = "Projet.Resume.francais";
         ##
         pattern_en = match_both_close "music" "instrument";
@@ -30,7 +32,7 @@ $test_data_table = [ordered]@{
     }
 
     archeology           = @{
-        pattern_fr = "arch.{1,3}olog";
+        pattern_fr = "arch[eé]olog";
         column_fr  = "Projet.Resume.francais";
         ##
         pattern_en = "archeolog";
@@ -38,55 +40,55 @@ $test_data_table = [ordered]@{
     }
 
     monument             = @{
-        pattern_fr = "Monument";
+        pattern_fr = "monument";
         column_fr  = "Projet.Resume.francais";
         ##
-        pattern_en = "Monument";
+        pattern_en = "monument";
         column_en  = "Projet.Resume.anglais";
     }
 
     pictoral             = @{
-        pattern_fr = "Pictural";
+        pattern_fr = "pictural";
         column_fr  = "Projet.Resume.francais";
         ##
-        pattern_en = "Pictural";
+        pattern_en = "pictural";
         column_en  = "Projet.Resume.anglais";
     }
 
     sculpture            = @{
-        pattern_fr = "Sculpture";
+        pattern_fr = "sculpture";
         column_fr  = "Projet.Resume.francais";
         ##
-        pattern_en = "Sculpture";
+        pattern_en = "sculpture";
         column_en  = "Projet.Resume.anglais";
     }
 
     coins                = @{
-        pattern_fr = "Monnaie";
+        pattern_fr = "monnaie";
         column_fr  = "Projet.Resume.francais";
         ##
-        pattern_en = "Coins";
+        pattern_en = "coin";
         column_en  = "Projet.Resume.anglais";
     }
 
     manuscript           = @{
-        pattern_fr = "Manuscrit";
+        pattern_fr = "manuscrit";
         column_fr  = "Projet.Resume.francais";
         ##
-        pattern_en = "Manuscript";
+        pattern_en = "manuscript";
         column_en  = "Projet.Resume.anglais";
     }
 
     subaquatic           = @{
-        pattern_fr = "Subaquatique";
+        pattern_fr = "subaquatique";
         column_fr  = "Projet.Resume.francais";
         ##
-        pattern_en = "Subaquatic";
+        pattern_en = "subaquatic";
         column_en  = "Projet.Resume.anglais";
     }
 
     wreck                = @{
-        pattern_fr = "Epave";
+        pattern_fr = "[eé]pave";
         column_fr  = "Projet.Resume.francais";
         ##
         pattern_en = "wreck";
@@ -94,23 +96,23 @@ $test_data_table = [ordered]@{
     }
 
     cultural_heritage    = @{
-        pattern_fr = match_both_close "Patrimo?" "culturel";
+        pattern_fr = match_both_close "patrimo" "culturel";
         column_fr  = "Projet.Resume.francais";
         ##
-        pattern_en = match_both_close "Cultural" "Heritag";
+        pattern_en = match_both_close "cultural" "heritage";
         column_en  = "Projet.Resume.anglais";
     }
 
     oral_heritage        = @{
-        pattern_fr = match_both_close "Patrimo?" "oral";
+        pattern_fr = match_both_close "patrimo" "oral";
         column_fr  = "Projet.Resume.francais";
         ##
-        pattern_en = match_both_close "Heritage" "oral";
+        pattern_en = match_both_close "heritage" "oral";
         column_en  = "Projet.Resume.anglais";
     }
 
     performance          = @{
-        pattern_fr = "spectacle.{1,3}vivant";
+        pattern_fr = match_both_close "spectacle" "vivant";
         column_fr  = "Projet.Resume.francais";
         ##
         pattern_en = "performance";
@@ -118,146 +120,146 @@ $test_data_table = [ordered]@{
     }
 
     ritual               = @{
-        pattern_fr = "Rituel";
+        pattern_fr = "rituel";
         column_fr  = "Projet.Resume.francais";
         ##
-        pattern_en = "Ritual";
+        pattern_en = "ritual";
         column_en  = "Projet.Resume.anglais";
     }
 
     tradition            = @{
-        pattern_fr = "Tradition";
+        pattern_fr = "tradition";
         column_fr  = "Projet.Resume.francais";
         ##
-        pattern_en = "Tradition";
+        pattern_en = "tradition";
         column_en  = "Projet.Resume.anglais";
     }
 
-    custum               = @{
-        pattern_fr = "Coutume";
+    custom               = @{
+        pattern_fr = "coutume";
         column_fr  = "Projet.Resume.francais";
         ##
-        pattern_en = "Custum";
+        pattern_en = "custom";
         column_en  = "Projet.Resume.anglais";
     }
 
     music                = @{
-        pattern_fr = "Musique";
+        pattern_fr = "musique";
         column_fr  = "Projet.Resume.francais";
-
-        pattern_en = "Music";
+        ##
+        pattern_en = "music";
         column_en  = "Projet.Resume.anglais";
     }
 
-    Heritage_kraft       = @{
-        pattern_fr = match_both_close "Patrimo?" "metier";
+    heritage_craft       = @{
+        pattern_fr = match_both_close "patrimo" "m[eé]tier";
         column_fr  = "Projet.Resume.francais";
         ##
-        pattern_en = match_both_close "Heritag?" "kraft";
+        pattern_en = match_both_close "heritage" "craft";
         column_en  = "Projet.Resume.anglais";
     }
 
     heritage_digital     = @{
-        pattern_fr = match_both_close "Patrimo?" "numerique";
+        pattern_fr = match_both_close "patrimo" "num[eé]rique";
         column_fr  = "Projet.Resume.francais";
         ##
-        pattern_en = match_both_close "Heritag?" "digital";
+        pattern_en = match_both_close "heritage" "digital";
         column_en  = "Projet.Resume.anglais";
     }
 
     heritage_natural     = @{
-        pattern_fr = match_both_close "Patrimo?" "naturel";
+        pattern_fr = match_both_close "patrimo" "naturel";
         column_fr  = "Projet.Resume.francais";
         ##
-        pattern_en = match_both_close "Heritag?" "natural";
+        pattern_en = match_both_close "heritage" "natural";
         column_en  = "Projet.Resume.anglais";
     }
 
     heritage_landscape   = @{
-        pattern_fr = match_both_close "Patrimo?" "paysage";
+        pattern_fr = match_both_close "patrimo" "paysage";
         column_fr  = "Projet.Resume.francais";
         ##
-        pattern_en = match_both_close "Heritag?" "Landscape";
+        pattern_en = match_both_close "heritage" "landscape";
         column_en  = "Projet.Resume.anglais";
     }
 
     heritage_geology     = @{
-        pattern_fr = match_both_close "Patrimo?" "geologie";
+        pattern_fr = match_both_close "patrimo" "g[eé]olog";
         column_fr  = "Projet.Resume.francais";
         ##
-        pattern_en = match_both_close "Heritag?" "geology";
+        pattern_en = match_both_close "heritage" "geolog";
         column_en  = "Projet.Resume.anglais";
     }
 
     heritage_botanic     = @{
-        pattern_fr = match_both_close "Patrimo?" "Botanique";
+        pattern_fr = match_both_close "patrimo" "botanique";
         column_fr  = "Projet.Resume.francais";
         ##
-        pattern_en = match_both_close "Heritag?" "Botanic";
+        pattern_en = match_both_close "heritage" "botanic";
         column_en  = "Projet.Resume.anglais";
     }
 
     heritage_species     = @{
-        pattern_fr = match_both_close "Patrimo?" "Espece";
+        pattern_fr = match_both_close "patrimo" "esp[eè]ce";
         column_fr  = "Projet.Resume.francais";
         ##
-        pattern_en = match_both_close "Heritag?" "Species";
+        pattern_en = match_both_close "heritage" "species";
         column_en  = "Projet.Resume.anglais";
     }
 
     heritage_ecosystem   = @{
-        pattern_fr = match_both_close "Patrimo?" "Ecosysteme";
+        pattern_fr = match_both_close "patrimo" "[eé]cosysteme";
         column_fr  = "Projet.Resume.francais";
         ##
-        pattern_en = match_both_close "Heritag?" "Ecosystem";
+        pattern_en = match_both_close "heritage" "ecosystem";
         column_en  = "Projet.Resume.anglais";
     }
 
     heritage_zoo         = @{
-        pattern_fr = match_both_close "Patrimo?" "Zoo";
+        pattern_fr = match_both_close "patrimo" "Zoo";
         column_fr  = "Projet.Resume.francais";
         ##        
-        pattern_en = match_both_close "Heritag?" "Zoo";
+        pattern_en = match_both_close "heritage" "Zoo";
         column_en  = "Projet.Resume.anglais";
     }
 
     heritage_aquarium    = @{
-        pattern_fr = match_both_close "Patrimo?" "aquarium";
+        pattern_fr = match_both_close "patrimo" "aquarium";
         column_fr  = "Projet.Resume.francais";
         ##
-        pattern_en = match_both_close "Heritag?" "aquarium";
+        pattern_en = match_both_close "heritage" "aquarium";
         column_en  = "Projet.Resume.anglais";
     }
 
     heritage_conflict    = @{
-        pattern_fr = match_both_close "Patrimo?" "conflit";
+        pattern_fr = match_both_close "patrimo" "conflit";
         column_fr  = "Projet.Resume.francais";
         ##
-        pattern_en = match_both_close "Heritag?" "conflict";
+        pattern_en = match_both_close "heritage" "conflict";
         column_en  = "Projet.Resume.anglais";
     }
 
     heritage_war         = @{
-        pattern_fr = match_both_close "Patrimo?" "guerre";
+        pattern_fr = match_both_close "patrimo" "guerre";
         column_fr  = "Projet.Resume.francais";
         ##
-        pattern_en = match_both_close "Heritag?" "war";
+        pattern_en = match_both_close "heritage" "war";
         column_en  = "Projet.Resume.anglais";
     }
 
-    heritage_pillage     = @{
-        pattern_fr = match_both_close "Patrimo?" "pillage";
+    heritage_looting     = @{
+        pattern_fr = match_both_close "patrimo" "pillage";
         column_fr  = "Projet.Resume.francais";
         ##
-        pattern_en = match_both_close "Heritag?" "pillage";
+        pattern_en = match_both_close "heritage" "looting";
         column_en  = "Projet.Resume.anglais";
     }
 
     heritage_destruction = @{
-        pattern_fr = match_both_close "Patrimo?" "Destruction";
+        pattern_fr = match_both_close "patrimo" "destruction";
         column_fr  = "Projet.Resume.francais";
         ##
-        pattern_en = match_both_close "Heritag?" "Destruction";
+        pattern_en = match_both_close "heritage" "destruction";
         column_en  = "Projet.Resume.anglais";
     }
 }
